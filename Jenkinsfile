@@ -6,5 +6,10 @@ pipeline {
                 echo 'Hello - mule cicd Master'
             }
         }
+        stage('Unit Test') { 
+            steps {
+                sh 'mvn clean test'
+            }
+        }
     }
 }
