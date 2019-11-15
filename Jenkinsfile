@@ -2,7 +2,7 @@ pipeline {
     agent any
     options {
         office365ConnectorWebhooks([
-            [name: "Office 365", url: "https://outlook.office.com/webhook/22f09f83-ab33-46f0-8ffa-3d000704ebf3@2bb82c64-2eb1-43f7-8862-fdc1d2333b50/JenkinsCI/bc5d776e5a2c4f77a4b2f94c14362bec/f8e05ff9-7932-45b2-ac3a-99b7a779e94e", notifyFailure: true]
+            [name: "mule-jenkins-con", url: "https://outlook.office.com/webhook/64805a1d-9de2-48ae-b900-0adbb9f22248@22ddce65-9770-4012-94f0-da65409d3999/JenkinsCI/f6bd047ff6764b7bb375953d70a76382/82ed54e0-8f97-4b40-96f8-94a9a532f7d0", notifyFailure: true]
         ])
     }
     stages { 
