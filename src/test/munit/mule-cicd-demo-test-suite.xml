@@ -9,6 +9,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     </spring:beans>
     <munit:test name="mule-cicd-demo-test-suite-mule-cicd-demoFlowTest" description="Test">
         <flow-ref name="mule-cicd-demoFlow" doc:name="Flow-ref to mule-cicd-demoFlow"/>
-        <munit:assert-payload-equals expectedValue="'pong'" doc:name="Assert Payload"/>
+        <munit:assert-payload-equals expectedValue="'pong1'" doc:name="Assert Payload"/>
     </munit:test>
 </mule>
