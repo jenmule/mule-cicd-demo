@@ -14,5 +14,12 @@ pipeline {
                 sh 'mvn clean test'
             }
         }
+        if (env.BRANCH_NAME == 'master') {
+            stage('Artifact') {
+                steps {
+                    echo 'Push to Artifactory'
+                }
+            }
+        }
     }
 }
