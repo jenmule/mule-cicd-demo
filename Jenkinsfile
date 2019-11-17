@@ -15,6 +15,11 @@ pipeline {
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'target\\munit-reports\\coverage', reportFiles: 'summary.html', reportName: 'Code Coverage', reportTitles: ''])
             }
         }
+        stage('Deploy Standalone') { 
+            steps {
+                sh 'mvn deploy -P standalone'
+            }
+        }
         stage('Artifact') {  
             when {
                 branch 'master'
