@@ -15,11 +15,13 @@
 
 		<mule.version>3.9.1</mule.version>
 		<mule.tools.version>1.2</mule.tools.version>
-		<munit.version>1.3.8</munit.version>
+		<munit.version>1.3.10</munit.version>
 		<mule.munit.support.version>3.9.1</mule.munit.support.version>
+		<mule.maven.version>2.3.3</mule.maven.version>
 	</properties>
 
 	<build>
+		<finalName>${artifactId}-${version}-b${build.number}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
@@ -29,6 +31,11 @@
 				<configuration>
 					<copyToAppsDirectory>true</copyToAppsDirectory>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -94,6 +101,36 @@
 			</testResource>
 		</testResources>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>standalone</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.mule.tools.maven</groupId>
+						<artifactId>mule-maven-plugin</artifactId>
+						<configuration>
+							<standaloneDeployment>
+								<muleVersion>${mule.version}</muleVersion>
+								<muleHome>${mule.home}</muleHome>
+								<applicationName>${artifactId}</applicationName>
+							</standaloneDeployment>
+						</configuration>
+						<executions>
+							<execution>
+								<id>deploy</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<!-- Mule Dependencies -->
 	<dependencies>
