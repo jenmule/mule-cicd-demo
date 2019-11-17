@@ -19,6 +19,17 @@
 		<mule.munit.support.version>3.9.1</mule.munit.support.version>
 		<mule.maven.version>2.3.3</mule.maven.version>
 	</properties>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
 		<finalName>${project.artifactId}-${version}-b${build.number}</finalName>
