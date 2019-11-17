@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Deploy Standalone') { 
             steps {
-                sh 'mvn deploy -P standalone'
+                sh 'mvn deploy -P standalone -Dmule.home=/home/sab/Downloads/opt/mule3'
             }
         }
         stage('Artifact') {  
