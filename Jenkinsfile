@@ -20,7 +20,7 @@ pipeline {
         stage('Unit Test') { 
             input {
                   message 'Proceed?'
-                  ok 'Yes'
+                  ok 'Yes!'
                   submitter 'sa'
                 }
             steps {
