@@ -21,6 +21,7 @@ pipeline {
             input {
                   message 'Proceed?'
                   ok 'Yes'
+                  submitter 'sa'
                 }
             steps {
                 sh 'mvn clean test'
