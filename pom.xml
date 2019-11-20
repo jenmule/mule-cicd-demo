@@ -18,26 +18,31 @@
 		<munit.version>1.3.8</munit.version>
 		<mule.munit.support.version>3.9.1</mule.munit.support.version>
 		<mule.maven.version>2.3.3</mule.maven.version>
+		<anypoint.username>${ANYPOINT_USERNAME}</anypoint.username>
+		<anypoint.password>${ANYPOINT_PASSWORD}</anypoint.password>
+		<cloundhub.env>DEV</cloundhub.env>
+		<anypoint.businessGroup>SabOrg</anypoint.businessGroup>
+		<region>SabOrg</region>
+		<anypoint.uri>https://anypoint.mulesoft.com</anypoint.uri>
+		<arm.target.name>local-392</arm.target.name>
+		<!-- One of: server, serverGroup, cluster -->
+		<arm.target.type>server</arm.target.type>
+		<arm.environment>Sandbox</arm.environment>
+		<build.number>0</build.number>
+		<maven.build.timestamp.format>yyMMddHHmmss</maven.build.timestamp.format>
 	</properties>
-	
-	<!--  <distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement> -->
-	
+
+	<!-- <distributionManagement> <snapshotRepository> <id>ossrh</id> <url>https://oss.sonatype.org/content/repositories/snapshots</url> 
+		</snapshotRepository> <repository> <id>ossrh</id> <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url> 
+		</repository> </distributionManagement> -->
+
 	<distributionManagement>
-       		<repository>
-         		<id>internal.repo</id>
-         		<name>Internal repo</name>
-         		<url>file:///home/sab/Downloads</url>
-       		</repository>
-   	</distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Internal repo</name>
+			<url>file:///home/sab/Downloads</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
 		<finalName>${project.artifactId}-${version}-b${build.number}</finalName>
@@ -131,6 +136,40 @@
 
 	<profiles>
 		<profile>
+			<id>cloudhub</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.mule.tools.maven</groupId>
+						<artifactId>mule-maven-plugin</artifactId>
+						<configuration>
+							<cloudHubDeployment>
+								<muleVersion>${mule.version}</muleVersion>
+								<username>${anypoint.username}</username>
+								<password>${anypoint.password}</password>
+								<applicationName>${artifactId}-${maven.build.timestamp}</applicationName>
+								<environment>${cloundhub.env}</environment>
+								<businessGroup>${anypoint.businessGroup}</businessGroup>
+								<uri>${anypoint.uri}</uri>
+								<region>${cloudhub.region}</region>								
+								<!-- <workerType>${cloudhub.workerType}</workerType>
+								<workers>${cloudhub.workers}</workers> -->
+							</cloudHubDeployment>
+						</configuration>
+						<executions>
+							<execution>
+								<id>deploy</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>standalone</id>
 			<build>
 				<plugins>
@@ -143,6 +182,39 @@
 								<muleHome>${mule.home}</muleHome>
 								<applicationName>${artifactId}</applicationName>
 							</standaloneDeployment>
+						</configuration>
+						<executions>
+							<execution>
+								<id>deploy</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>arm</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.mule.tools.maven</groupId>
+						<artifactId>mule-maven-plugin</artifactId>
+						<configuration>
+							<armDeployment>
+								<muleVersion>${mule.version}</muleVersion>
+								<username>${anypoint.username}</username>
+								<password>${anypoint.password}</password>
+								<businessGroup>${anypoint.businessGroup}</businessGroup>
+								<uri>${anypoint.uri}</uri>
+								<target>${arm.target.name}</target>
+								<!-- One of: server, serverGroup, cluster -->
+								<targetType>${arm.target.type}</targetType>
+								<environment>${arm.environment}</environment>
+							</armDeployment>
 						</configuration>
 						<executions>
 							<execution>
