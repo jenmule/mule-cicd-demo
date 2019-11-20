@@ -18,8 +18,10 @@
 		<munit.version>1.3.8</munit.version>
 		<mule.munit.support.version>3.9.1</mule.munit.support.version>
 		<mule.maven.version>2.3.3</mule.maven.version>
-		<anypoint.username>${ANYPOINT_USERNAME}</anypoint.username>
-		<anypoint.password>${ANYPOINT_PASSWORD}</anypoint.password>
+		<!--<anypoint.username>${ANYPOINT_USERNAME}</anypoint.username>
+		<anypoint.password>${ANYPOINT_PASSWORD}</anypoint.password>-->
+		<anypoint.username>sab</anypoint.username>
+		<anypoint.password>Mul3pwd</anypoint.password>
 		<cloundhub.env>DEV</cloundhub.env>
 		<anypoint.businessGroup>SabOrg</anypoint.businessGroup>
 		<region>SabOrg</region>
