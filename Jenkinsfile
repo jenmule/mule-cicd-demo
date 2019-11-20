@@ -35,12 +35,17 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Standalone') { 
+        stage('Deploy CloudHub') { 
+            steps {
+                sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_USERNAME=$ANYPOINT_PSW'
+            }
+        }
+        /*stage('Deploy Standalone') { 
             steps {
                 sh 'mvn deploy -P standalone -Dmule.home=/home/sab/Downloads/opt/mule3'
             }
         }
-        /*stage('Artifact') {  
+        stage('Artifact') {  
             when {
                 branch 'master'
             }
