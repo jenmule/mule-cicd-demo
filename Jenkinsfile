@@ -19,22 +19,22 @@ pipeline {
             }
           }
         }*/
-        stage('Unit Test') { 
-            /*input {
+        /*stage('Unit Test') { 
+            input {
                   message 'Proceed?'
                   ok 'Yes!'
                   submitter 'sa'
-                }*/
+                }
             steps {
                 sh 'mvn clean test'
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'target\\munit-reports\\coverage', reportFiles: 'summary.html', reportName: 'Code Coverage', reportTitles: ''])
             }
             post {
                 success {
-                    junit 'target/surefire-reports/**/*.xml' 
+                    junit 'target/surefire-reports/**-/*.xml' 
                 }
             }
-        }
+        }*/
         stage('Deploy CloudHub') { 
             steps {
                 sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_USERNAME=$ANYPOINT_PSW'
