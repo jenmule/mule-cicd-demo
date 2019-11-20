@@ -151,8 +151,8 @@
 								<environment>${cloundhub.env}</environment>
 								<businessGroup>${anypoint.businessGroup}</businessGroup>
 								<uri>${anypoint.uri}</uri>
-								<region>${cloudhub.region}</region>								
-								<!-- <workerType>${cloudhub.workerType}</workerType>
+								<!-- <region>${cloudhub.region}</region>								
+								<workerType>${cloudhub.workerType}</workerType>
 								<workers>${cloudhub.workers}</workers> -->
 							</cloudHubDeployment>
 						</configuration>
