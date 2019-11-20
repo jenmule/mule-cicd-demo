@@ -151,6 +151,7 @@
 								<environment>${cloundhub.env}</environment>
 								<businessGroup>${anypoint.businessGroup}</businessGroup>
 								<uri>${anypoint.uri}</uri>
+								<workerType>Micro</workerType>
 								<!-- <region>${cloudhub.region}</region>								
 								<workerType>${cloudhub.workerType}</workerType>
 								<workers>${cloudhub.workers}</workers> -->
