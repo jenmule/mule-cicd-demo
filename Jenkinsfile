@@ -1,4 +1,9 @@
 pipeline {
+    
+    environment {
+      ANYPOINT = credentials("ANYPOINT")
+    }
+    
     agent any
     options {
         // Keep the 10 most recent builds
@@ -9,7 +14,9 @@ pipeline {
         stage('Example') {
             steps {
                 echo 'Hello - mule cicd Master'
-                echo $ANYPOINT_USR
+                sh 'echo "ANYPOINT is $ANYPOINT"'
+                sh 'echo "ANYPOINT_USR is $ANYPOINT_USR"'
+                sh 'echo "ANYPOINT_PSW is $ANYPOINT_PSW"'
             }
         }
         /*stage('Decide tag on Docker Hub') {
