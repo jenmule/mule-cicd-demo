@@ -17,6 +17,13 @@ pipeline {
                 sh 'echo "ANYPOINT is $ANYPOINT"'
                 sh 'echo "ANYPOINT_USR is $ANYPOINT_USR"'
                 sh 'echo "ANYPOINT_PSW is $ANYPOINT_PSW"'
+                
+                //Write to file
+                dir("combined") {
+                    sh 'echo $ANYPOINT > foo.txt'
+                }
+                sh 'echo $ANYPOINT_PSW > foo_psw.txt'
+                sh 'echo $ANYPOINT_USR > foo_usr.txt
             }
         }
         /*stage('Decide tag on Docker Hub') {
