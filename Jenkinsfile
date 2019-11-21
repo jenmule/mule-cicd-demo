@@ -83,9 +83,9 @@ pipeline {
               }             
               environment {
                 DEPLOY_TO = "${env.CH_ENV_PROD}"
-                }
+              }
               steps {
-                echo 'Hello12 - $DEPLOY_TO'
+                echo 'Hello12 - ${DEPLOY_TO}'
                 /*script {
                     def proceed = true
                     try {
