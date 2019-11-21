@@ -81,12 +81,12 @@ pipeline {
               when {
                 allOf { branch 'develop'; environment name: 'DEPLOY_TARGET', value: 'CH' }            
               }             
-              //environment {
-                //DEPLOY_TO = "${env.CH_ENV_PROD}"
-              //}
-              steps {
+              environment {
                 DEPLOY_TO = "${env.CH_ENV_PROD}"
-                echo 'Hello123 - ${DEPLOY_TO}'
+              }
+              steps {
+                //DEPLOY_TO = "${env.CH_ENV_PROD}"
+                //echo 'Hello123 - ${DEPLOY_TO}'
                 /*script {
                     def proceed = true
                     try {
@@ -101,7 +101,7 @@ pipeline {
                         echo 'Deploying to production'
                     }
                 }*/            
-                //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
+                sh "mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1"
               }
         }
         /*stage('Deploy ARM') { 
