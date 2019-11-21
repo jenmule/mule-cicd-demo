@@ -39,11 +39,17 @@ pipeline {
                     junit 'target/surefire-reports/**-/*.xml' 
                 }
             }
-        }*/
+        }
         stage('Deploy CloudHub') { 
             steps {
                 //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW'
                 sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW'
+            }
+        }*/
+        stage('Deploy CloudHub') { 
+            steps {
+                //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW'
+                sh 'mvn deploy -P arm -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW'
             }
         }
         /*stage('Deploy Standalone') { 
