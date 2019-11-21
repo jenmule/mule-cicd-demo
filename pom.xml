@@ -18,16 +18,25 @@
 		<munit.version>1.3.8</munit.version>
 		<mule.munit.support.version>3.9.1</mule.munit.support.version>
 		<mule.maven.version>2.3.3</mule.maven.version>
+		
+		<!-- ANYPOINT -->
 		<anypoint.username>${ANYPOINT_USERNAME}</anypoint.username>
 		<anypoint.password>${ANYPOINT_PASSWORD}</anypoint.password>
-		<cloundhub.env>DEV</cloundhub.env>
-		<anypoint.businessGroup>SabOrg</anypoint.businessGroup>
-		<region>SabOrg</region>
 		<anypoint.uri>https://anypoint.mulesoft.com</anypoint.uri>
-		<arm.target.name>vm-mule</arm.target.name>
+		<anypoint.businessGroup>SabOrg</anypoint.businessGroup>
+		
+		<!-- CLOUDHUB -->
+		<cloundhub.env>${CH_ENV}</cloundhub.env>
+		<cloundhub.region>${CH_RGN}</cloundhub.region>
+		<cloundhub.workerType>${CH_WORKERTYPE}</cloundhub.workerType>
+		<cloundhub.workers>${CH_WORKERS}</cloundhub.workers>
+		
+		<!-- ARM -->
+		<arm.target.name>${ARM_TARGET}</arm.target.name>
 		<!-- One of: server, serverGroup, cluster -->
-		<arm.target.type>server</arm.target.type>
-		<arm.environment>DEV</arm.environment>
+		<arm.target.type>${ARM_TARGET_TYPE}</arm.target.type>
+		<arm.environment>${ARM_ENV}</arm.environment>
+		
 		<build.number>0</build.number>
 		<maven.build.timestamp.format>yyMMddHHmmss</maven.build.timestamp.format>
 	</properties>
@@ -206,6 +215,7 @@
 						<artifactId>mule-maven-plugin</artifactId>
 						<configuration>
 							<armDeployment>
+								<applicationName>${artifactId}-${maven.build.timestamp}</applicationName>
 								<muleVersion>${mule.version}</muleVersion>
 								<username>${anypoint.username}</username>
 								<password>${anypoint.password}</password>
