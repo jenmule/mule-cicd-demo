@@ -2,9 +2,6 @@ pipeline {
     
     environment {
       ANYPOINT = credentials("ANYPOINT")
-    }
-    
-    envrionment {
         if (env.BRANCH_NAME == 'master') {
             DEPLOY_TO = 'DEV'
         }
