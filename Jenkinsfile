@@ -81,7 +81,10 @@ pipeline {
                 DEPLOY_TO = "${env.CH_ENV_PROD}"
                 }
               steps {
-                input message: "Deploy to production?", ok: "Deploy"
+                //input message: "Deploy to production?", ok: "Deploy"
+                timeout(time: 10, unit: 'SECONDS') {
+                  input(message: 'Deploy this build to QA?')                
+                } 
                 echo 'Deploying to production'
                 //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
               }
