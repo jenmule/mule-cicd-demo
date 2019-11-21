@@ -11,6 +11,16 @@ pipeline {
   office365ConnectorWebhooks([[name: 'mule-jenkins-connect', notifyBackToNormal: true, notifyFailure: true, notifyUnstable: true, url: 'https://outlook.office.com/webhook/64805a1d-9de2-48ae-b900-0adbb9f22248@22ddce65-9770-4012-94f0-da65409d3999/JenkinsCI/c2513a42b1b848e3a8f26522e8b3e8df/82ed54e0-8f97-4b40-96f8-94a9a532f7d0']])
 }
     stages { 
+        stage('Initialize Master Branch Variables') {
+            when {
+                branch 'master'
+            }
+            steps {
+                environment { 
+                    DEPLOY_TO = 'DEV'
+                }
+            }
+        }
         /*stage('Example') {
             steps {
                 echo 'Hello - mule cicd Master'
@@ -41,13 +51,8 @@ pipeline {
             }
         }*/
         stage('Deploy CloudHub') { 
-            when {
-                branch 'master'
-                environment name: 'DEPLOY_TO', value: 'DEV'
-            }
             steps {
-                echo 'Hello - mule cicd Master'
-                //echo '$DEPLOY_TO'
+                echo '$DEPLOY_TO'
                 //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=$DEPLOY_TO -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
             }
         }
