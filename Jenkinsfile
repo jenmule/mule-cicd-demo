@@ -29,13 +29,13 @@ pipeline {
                     DEPLOY_TO = 'DEV'
                 }
             }
-        }
+        }*/
         stage('Example') {
             steps {
                 echo 'Hello - mule cicd Master'
             }
         }
-        stage('Decide tag on Docker Hub') {
+        /*stage('Decide tag on Docker Hub') {
           steps {
             script {
               env.TAG_ON_DOCKER_HUB = input message: 'User input required',
