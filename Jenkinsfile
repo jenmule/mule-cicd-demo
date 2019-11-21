@@ -43,7 +43,7 @@ pipeline {
                 echo 'Hello - mule cicd Master'
             }
         }
-        stage('Deploy CloudHub - DEV') { 
+        /*stage('Deploy CloudHub - DEV') { 
               when {
                     environment name: 'DEPLOY_TARGET', value: 'CH'
               }
@@ -65,7 +65,7 @@ pipeline {
                steps {
                       sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
                     }
-        }
+        }*/
        stage('Deploy CloudHub - PRODUCTION') { 
               when {
                 allOf { branch 'develop'; environment name: 'DEPLOY_TARGET', value: 'CH' }            
