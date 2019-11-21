@@ -14,16 +14,6 @@ pipeline {
         stage('Example') {
             steps {
                 echo 'Hello - mule cicd Master'
-                sh 'echo "ANYPOINT is $ANYPOINT"'
-                sh 'echo "ANYPOINT_USR is $ANYPOINT_USR"'
-                sh 'echo "ANYPOINT_PSW is $ANYPOINT_PSW"'
-                
-                //Write to file
-                dir("combined") {
-                    sh 'echo $ANYPOINT > foo.txt'
-                }
-                sh 'echo $ANYPOINT_PSW > foo_psw.txt'
-                sh 'echo $ANYPOINT_USR > foo_usr.txt'
             }
         }
         /*stage('Decide tag on Docker Hub') {
@@ -53,7 +43,7 @@ pipeline {
         stage('Deploy CloudHub') { 
             steps {
                 //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW'
-                sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=Mul3pwd'
+                sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW'
             }
         }
         /*stage('Deploy Standalone') { 
