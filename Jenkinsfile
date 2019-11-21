@@ -43,6 +43,17 @@ pipeline {
                 echo 'Hello - mule cicd Master'
             }
         }
+        /*stage('Unit Test') { 
+            steps {
+                sh 'mvn clean test'
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'target\\munit-reports\\coverage', reportFiles: 'summary.html', reportName: 'Code Coverage', reportTitles: ''])
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**-/*.xml' 
+                }
+            }
+        }*/
         /*stage('Deploy CloudHub - DEV') { 
               when {
                     environment name: 'DEPLOY_TARGET', value: 'CH'
@@ -69,82 +80,30 @@ pipeline {
        stage('Deploy CloudHub - PRODUCTION') { 
               when {
                 allOf { branch 'develop'; environment name: 'DEPLOY_TARGET', value: 'CH' }            
-              }       
-             /*input {
-                  message 'Deploy to production?'
-                  ok 'Yes!'
-                  submitter 'sa'
-                }*/              
+              }             
               environment {
                 DEPLOY_TO = "${env.CH_ENV_PROD}"
                 }
               steps {
-                //input message: "Deploy to production?", ok: "Deploy"
-                script {
+                echo 'Hello - ${env.CH_ENV_PROD}'
+                /*script {
                     def proceed = true
                     try {
                         timeout(time: 15, unit: 'SECONDS') {
                             input(message: 'Deploy to production?')
                         }
                     } catch (err) {
-                        echo 'Errrrr'
+                        echo 'Skipped production deployment'
                         proceed = false
                     }
                     if(proceed) {
                         echo 'Deploying to production'
-                    } else {
-                        echo 'Skip production'
                     }
-                }
-                
-                /*try {
-                  stage('wait')
-                  {
-                          timeout(time: 10, unit: 'SECONDS') {
-                            input(message: 'Deploy this build to QA?')    
-                            echo 'Deploying to production'
-                          }
-                  }
-                }
-                catch (err) {
-                  def user = err.getCauses()[0].getUser()
-                  if('SYSTEM' == user.toString()) { //timeout
-                      currentBuild.result = "SUCCESS"
-                  }
-                }  */              
+                }*/            
                 //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
               }
         }
-        /*stage('Decide tag on Docker Hub') {
-          steps {
-            script {
-              env.TAG_ON_DOCKER_HUB = input message: 'User input required',
-                  parameters: [choice(name: 'Tag on Docker Hub', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
-            }
-          }
-        }*/
-        /*stage('Unit Test') { 
-            input {
-                  message 'Proceed?'
-                  ok 'Yes!'
-                  submitter 'sa'
-                }
-            steps {
-                sh 'mvn clean test'
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'target\\munit-reports\\coverage', reportFiles: 'summary.html', reportName: 'Code Coverage', reportTitles: ''])
-            }
-            post {
-                success {
-                    junit 'target/surefire-reports/**-/*.xml' 
-                }
-            }
-        }
-        stage('Deploy CloudHub') { 
-            steps {
-              sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
-            }
-        }
-        stage('Deploy ARM') { 
+        /*stage('Deploy ARM') { 
             steps {
                 sh 'mvn deploy -P arm -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DARM_ENV=$DEPLOY_TO -DARM_TARGET=vm-mule -DARM_TARGET_TYPE=server'
             }
