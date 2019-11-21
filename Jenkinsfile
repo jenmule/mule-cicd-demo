@@ -82,9 +82,10 @@ pipeline {
                 allOf { branch 'develop'; environment name: 'DEPLOY_TARGET', value: 'CH' }            
               }             
               //environment {
-                DEPLOY_TO = "${env.CH_ENV_PROD}"
+                //DEPLOY_TO = "${env.CH_ENV_PROD}"
               //}
               steps {
+                DEPLOY_TO = "${env.CH_ENV_PROD}"
                 echo 'Hello123 - ${DEPLOY_TO}'
                 /*script {
                     def proceed = true
