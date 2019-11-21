@@ -11,12 +11,12 @@ pipeline {
   office365ConnectorWebhooks([[name: 'mule-jenkins-connect', notifyBackToNormal: true, notifyFailure: true, notifyUnstable: true, url: 'https://outlook.office.com/webhook/64805a1d-9de2-48ae-b900-0adbb9f22248@22ddce65-9770-4012-94f0-da65409d3999/JenkinsCI/c2513a42b1b848e3a8f26522e8b3e8df/82ed54e0-8f97-4b40-96f8-94a9a532f7d0']])
 }
     stages { 
-        stage('Example') {
+        /*stage('Example') {
             steps {
                 echo 'Hello - mule cicd Master'
             }
         }
-        /*stage('Decide tag on Docker Hub') {
+        stage('Decide tag on Docker Hub') {
           steps {
             script {
               env.TAG_ON_DOCKER_HUB = input message: 'User input required',
@@ -46,14 +46,14 @@ pipeline {
                 environment name: 'DEPLOY_TO', value: 'DEV'
             }
             steps {
-                echo '$DEPLOY_TO'
+                echo 'Hello - mule cicd Master'
+                //echo '$DEPLOY_TO'
                 //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=$DEPLOY_TO -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
             }
         }
-        /*stage('Deploy CloudHub') { 
+        /*stage('Deploy ARM') { 
             steps {
-                //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW'
-                sh 'mvn deploy -P arm -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=$ANYPOINT_PSW -DANYPOINT_PASSWORD=$ANYPOINT_PSW'
+                sh 'mvn deploy -P arm -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DARM_ENV=$DEPLOY_TO -DARM_TARGET=vm-mule -DARM_TARGET_TYPE=server'
             }
         }
         /*stage('Deploy Standalone') { 
