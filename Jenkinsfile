@@ -48,7 +48,9 @@ pipeline {
                     environment name: 'DEPLOY_TARGET', value: 'CH'
               }
               steps {
-                DEPLOY_TO = CH_ENV_DEV
+                environment {
+                  DEPLOY_TO = ${env.CH_ENV_DEV}
+                }
                 sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
               }
         }
@@ -58,7 +60,9 @@ pipeline {
                  anyOf { branch 'develop'; branch 'release' } 
                }
                steps {
-                      DEPLOY_TO = CH_ENV_QA
+                      environment {
+                        DEPLOY_TO = ${env.CH_ENV_QA}
+                      }
                       sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
                     }
         }
@@ -73,7 +77,9 @@ pipeline {
                   submitter 'sa'
               }
               steps {
-                DEPLOY_TO = CH_ENV_PROD
+                environment {
+                  DEPLOY_TO = ${env.CH_ENV_PROD}
+                }
                 sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
               }
         }
