@@ -61,7 +61,7 @@ pipeline {
         }*/
         stage('Deploy CloudHub') { 
             steps {
-                echo '$DEPLOY_TO'
+              echo '${env.DEPLOY_TO}'
                 //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=$DEPLOY_TO -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
             }
         }
