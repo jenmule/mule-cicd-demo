@@ -23,7 +23,7 @@ pipeline {
                     sh 'echo $ANYPOINT > foo.txt'
                 }
                 sh 'echo $ANYPOINT_PSW > foo_psw.txt'
-                sh 'echo $ANYPOINT_USR > foo_usr.txt
+                sh 'echo $ANYPOINT_USR > foo_usr.txt'
             }
         }
         /*stage('Decide tag on Docker Hub') {
