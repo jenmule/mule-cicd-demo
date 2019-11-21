@@ -68,18 +68,20 @@ pipeline {
         }
        stage('Deploy CloudHub - PRODUCTION') { 
               when {
-                allOf { branch 'release'; environment name: 'DEPLOY_TARGET', value: 'CH' }
-                input {
+                allOf { branch 'release'; environment name: 'DEPLOY_TARGET', value: 'CH' }            
+              }
+         
+             /*input {
                   message 'Deploy to production?'
                   ok 'Yes!'
                   submitter 'sa'
-                }
-              }
+                }*/
               
               environment {
                 DEPLOY_TO = "${env.CH_ENV_PROD}"
                 }
               steps {
+                input message: "Deploy to production?", ok: "Deploy"
                 sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
               }
         }
