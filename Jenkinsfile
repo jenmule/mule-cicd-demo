@@ -69,32 +69,32 @@ pipeline {
        stage('Deploy CloudHub - PRODUCTION') { 
               when {
                 allOf { branch 'develop'; environment name: 'DEPLOY_TARGET', value: 'CH' }            
-              }
-         
+              }       
              /*input {
                   message 'Deploy to production?'
                   ok 'Yes!'
                   submitter 'sa'
-                }*/
-              
+                }*/              
               environment {
                 DEPLOY_TO = "${env.CH_ENV_PROD}"
                 }
               steps {
                 //input message: "Deploy to production?", ok: "Deploy"
                 try {
-                  timeout(time: 10, unit: 'SECONDS') {
-                    input(message: 'Deploy this build to QA?')    
-                    echo 'Deploying to production'
-                  } 
+                  stage('wait')
+                  {
+                          timeout(time: 10, unit: 'SECONDS') {
+                            input(message: 'Deploy this build to QA?')    
+                            echo 'Deploying to production'
+                          }
+                  }
                 }
                 catch (err) {
                   def user = err.getCauses()[0].getUser()
                   if('SYSTEM' == user.toString()) { //timeout
                       currentBuild.result = "SUCCESS"
                   }
-                }
-                
+                }                
                 //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
               }
         }
