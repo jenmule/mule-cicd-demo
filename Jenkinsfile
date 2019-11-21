@@ -16,7 +16,7 @@ pipeline {
       //CloudHub Enviroments
       CH_ENV_DEV = 'DEV'
       CH_ENV_QA = 'QA'
-      CH_ENV_PROD = 'PRODUCTION'
+      CH_ENV_PROD = 'Production'
       //China Onprem Enviroments
       ARM_C_ENV_DEV = 'DEV'
       ARM_C_ENV_QA = 'QA'
