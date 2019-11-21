@@ -1,10 +1,16 @@
+def getEnvFromBranch(branch) {
+  if (branch == 'master') {
+    return 'DEV'
+  } else {
+    return 'STAGING'
+ }
+}
+
 pipeline {
     
     environment {
       ANYPOINT = credentials("ANYPOINT")
-        if (env.BRANCH_NAME == 'master') {
-            DEPLOY_TO = 'DEV'
-        }
+      DEPLOY_TO = getEnvFromBranch(env.BRANCH_NAME)
     }
     
     agent any
