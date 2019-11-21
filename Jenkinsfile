@@ -87,10 +87,13 @@ pipeline {
                             input(message: 'Deploy to production?')
                         }
                     } catch (err) {
+                        echo 'Errrrr'
                         proceed = false
                     }
                     if(proceed) {
                         echo 'Deploying to production'
+                    } else {
+                        echo 'Skip production'
                     }
                 }
                 
