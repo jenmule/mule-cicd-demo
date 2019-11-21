@@ -70,11 +70,11 @@ pipeline {
               when {
                 allOf { branch 'release'; environment name: 'DEPLOY_TARGET', value: 'CH' }
               }
-              input {
+              /*input {
                   message 'Deploy to production?'
                   ok 'Yes!'
                   submitter 'sa'
-              }
+              }*/
               environment {
                 DEPLOY_TO = "${env.CH_ENV_PROD}"
                 }
