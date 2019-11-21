@@ -58,16 +58,15 @@ pipeline {
                     junit 'target/surefire-reports/**-/*.xml' 
                 }
             }
-        }*/
+        }
         stage('Deploy CloudHub') { 
             steps {
-              echo "Building in ${env.DEPLOY_TO}"
-                //sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=$DEPLOY_TO -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
+              sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DCH_ENV=${env.DEPLOY_TO} -DCH_RGN=eu-west-1 -DCH_WORKERTYPE=Micro -DCH_WORKERS=1'
             }
-        }
-        /*stage('Deploy ARM') { 
+        }*/
+        stage('Deploy ARM') { 
             steps {
-                sh 'mvn deploy -P arm -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DARM_ENV=$DEPLOY_TO -DARM_TARGET=vm-mule -DARM_TARGET_TYPE=server'
+                sh 'mvn deploy -P arm -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW -DARM_ENV=${env.DEPLOY_TO} -DARM_TARGET=vm-mule -DARM_TARGET_TYPE=server'
             }
         }
         /*stage('Deploy Standalone') { 
