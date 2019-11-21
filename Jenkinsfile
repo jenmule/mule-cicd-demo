@@ -52,7 +52,7 @@ pipeline {
         }*/
         stage('Deploy CloudHub') { 
             steps {
-                sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_USERNAME=$ANYPOINT_PSW'
+                sh 'mvn deploy -P cloudhub -DANYPOINT_USERNAME=$ANYPOINT_USR -DANYPOINT_PASSWORD=$ANYPOINT_PSW'
             }
         }
         /*stage('Deploy Standalone') { 
