@@ -68,7 +68,7 @@ pipeline {
         }
        stage('Deploy CloudHub - PRODUCTION') { 
               when {
-                allOf { branch 'release'; environment name: 'DEPLOY_TARGET', value: 'CH' }            
+                allOf { branch 'develop'; environment name: 'DEPLOY_TARGET', value: 'CH' }            
               }
          
              /*input {
