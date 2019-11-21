@@ -12,7 +12,7 @@ pipeline {
       ANYPOINT = credentials("ANYPOINT")
       //DEPLOY_TO = getEnvFromBranch(env.BRANCH_NAME)
       // CloudHub (CH) | Mule China Onprem (ARM_C) | Mule EU Onprem (ARM_EU) 
-      DEPLOY_TARGET = 'ARM_C'
+      DEPLOY_TARGET = 'CH'
       //CloudHub Enviroments
       CH_ENV_DEV = 'DEV'
       CH_ENV_QA = 'QA'
